@@ -32,14 +32,21 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="index.html" class="js-logo-clone">MediCare</a>
+              <a href="index.html" class="js-logo-clone">MEDICARE</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li class="active"><a href="index.html">Home</a></li>
-                <li><a (click)="toggleComponent()">Store</a></li>
+                <li><a *ngIf="!showPatientComponent" (click)="toggleComponent()">Store</a></li>
+                <li class="has-children">
+                  <a href="#">Patient Managment</a>
+                  <ul class="dropdown">
+                    <li><a (click)="patientComponentOrder()">View Your Orders</a></li>
+                    <li><a></a></li>
+                  </ul>
+                </li>
                 <li class="has-children">
                   <a>Inventory Mangement</a>
                 <ul class="dropdown">
@@ -66,7 +73,7 @@
       </div>
     </div>
 
-    <div class="site-blocks-cover backgroundImg" *ngIf="!showComponent && !inventoryComponent" >
+    <div class="site-blocks-cover backgroundImg" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent" >
       <div class="container">
         <div class="row">
           <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
@@ -81,8 +88,7 @@
         </div>
       </div>
     </div>
-
-    <div class="site-section" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent">
       <div class="container">
         <div class="row align-items-stretch section-overlap">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -122,8 +128,7 @@
         </div>
       </div>
     </div>
-
-    <div class="site-section" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent">
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -134,7 +139,7 @@
         <div class="row" >
           <div class="col-sm-6 col-lg-4 text-center item mb-4">
             <span class="tag">Sale</span>
-            <a href="shop-single.html"> <img src="images/product_01.png" alt="Image"></a>
+            <a href="shop-single.html"> <img src="" alt="Image"></a>
             <h3 class="text-dark"><a href="shop-single.html">Bioderma</a></h3>
             <p class="price"><del>95.00</del> &mdash; $55.00</p>
           </div>
@@ -175,8 +180,7 @@
       </div>
     </div>
 
-    
-    <div class="site-section bg-light" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section bg-light" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent">
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -194,7 +198,7 @@
               </div>
 
               <div class="text-center item mb-4">
-                <a href="shop-single.html"> <img src="images/product_01.png" alt="Image"></a>
+                <a href="shop-single.html"> <img src="" alt="Image"></a>
                 <h3 class="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
                 <p class="price">$120.00</p>
               </div>
@@ -216,8 +220,7 @@
         </div>
       </div>
     </div>
-
-    <div class="site-section" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section" *ngIf="!showComponent && !inventoryComponent" && !showPatientComponent>
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -276,7 +279,14 @@
       </div>
     </div>
 
-    <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');" *ngIf="!showComponent && !inventoryComponent && showPatientComponent">
+      <app-patient></app-patient>
+    </div>
+
+     <div *ngIf="showComponent">
+      <app-store ></app-store>
+    </div>
+    <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');">
       <div class="container">
         <div class="row align-items-stretch">
           <div class="col-lg-6 mb-5 mb-lg-0">
@@ -301,13 +311,13 @@
       </div>
     </div>
 
-    <div *ngIf="showComponent">
+    <!--<div *ngIf="showComponent">
       <app-store></app-store>
     </div>
     <div *ngIf="inventoryComponent">
       <app-inventory [selectedSection]="selectedSection"></app-inventory>
     </div>
-
+    </div>-->
     <footer class="site-footer">
       <div class="container">
         <div class="row">
@@ -372,6 +382,7 @@
 
 
 </main>
+
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->

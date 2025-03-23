@@ -1,0 +1,277 @@
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+  <link rel="stylesheet" href="css/aos.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+
+   <!--Prescription Data form-->
+   <div *ngIf="orderMedicine">
+    <div class="bg-light py-3" *ngIf="!showPatientManagment">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Patient Managment</strong><span class="mx-2 mb-0">/</span><strong class="text-black">Make your Order</strong></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-container" style="margin-top: 2%;">
+      <form [formGroup]="myForm" (ngSubmit)="addNewPrescription()" #prescriptionForm="ngForm">
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Doctor's Name <span class="required">*</span></label>
+                  <i class="fas fa-user-md"></i>
+                  <input type="text" class="form-control" placeholder="Doctor's Name" formControlName="dname" name="dname" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Patient's Name <span class="required">*</span></label>
+                  <i class="fas fa-user"></i>
+                  <input type="text" class="form-control" placeholder="Patient's Name" formControlName="pname" name="pname" required>
+              </div>
+          </div>
+  
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Patient's Age <span class="required">*</span></label>
+                  <i class="fas fa-calendar"></i>
+                  <input type="text" class="form-control" placeholder="Patient's Age" formControlName="page" name="page" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Select Gender <span class="required">*</span></label>
+                  <select class="form-control" formControlName="gend" name="gend" required>
+                      <option value="">Please Select</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                  </select>
+              </div>
+          </div>
+  
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Email <span class="required">*</span></label>
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="pemail" name="pemail" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Contact No <span class="required">*</span></label>
+                  <i class="fas fa-phone"></i>
+                  <input type="tel" class="form-control" placeholder="Contact Number" formControlName="pno" name="pno" required>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+                <label>Medicine allergies?<span class="required">*</span></label>
+                <select class="form-control" formControlName="gend" name="gend" required>
+                    <option value="">Please Select</option>
+                    <option value="male">Yes</option>
+                    <option value="female">No</option>
+                </select>
+            </div>
+            <div class="form-group col" style="margin-left: 5%;">
+                <label>Describe allergies</label>
+                <i class="fas fa-calendar"></i>
+                <textarea class="form-control" placeholder="Patient's Age" formControlName="page" name="page" required></textarea>
+            </div>
+        </div>
+  
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Select Date of Order<span class="required">*</span></label>
+                  <i class="fas fa-calendar"></i>
+                  <input type="date" class="form-control" placeholder="Select date order required" formControlName="pdate" name="pdate" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Duration <span class="required">*</span></label>
+                  <select class="form-control" formControlName="pdays" name="pdays" required>
+                    <option value="">Please Select</option>
+                    <option value="1 Week">1 Week</option>
+                    <option value="2 Week">2 Week</option>
+                    <option value="3 Week">3 Week</option>
+                    <option value="1 Month">1 Month</option>
+                    <option value="2 Month">2 Month</option>
+                    <option value="Other">Other</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+                <label>Frequency<span class="required">*</span></label>
+                <select class="form-control" formControlName="pdays" name="pdays" required>
+                  <option value="">Please Select</option>
+                  <option value="One Time">One Time</option>
+                  <option value="On Going">On Going</option>
+                </select>
+            </div>
+            <div class="form-group col" style="margin-left: 5%;">
+                <label>Special Notes</label>
+                <i class="fas fa-calendar"></i>
+                <textarea class="form-control" placeholder="Patient's Age" formControlName="page" name="page" required></textarea>
+            </div>
+        </div>
+  
+          <div class="form-group">
+              <label>Upload your Prescription <span class="required">*</span></label>
+              <input type="file" class="form-control" (change)="uploadImage($event)" name="pres"/>
+          </div>
+  
+          <button type="submit" class="btn-submit" [disabled]="!myForm.valid">Make your Order</button>
+      </form>
+  </div>
+  
+  <!---->
+
+</div>
+
+<!--List of Table-->
+
+<div *ngIf="orderList" >
+  <div class="bg-light py-3" *ngIf="!showPatientManagment">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Patient Managment</strong><span class="mx-2 mb-0">/</span><strong class="text-black">View your Orders</strong>
+          <button style="margin-left:1000px;" class="btn-add" (click)="orderMedicinefunction()">Add your Order</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="table-container">
+   
+    <!--<h2 style="color:#222f67">List of your Orders</h2>-->
+    <table>
+        <thead>
+            <tr>
+                <th>Doctor's Name</th>
+                <th>Patient's Name</th>
+                <th>Age</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Submitted Date</th>
+                <th>Date of Order</th>
+                <th>Prescription</th>
+                <th>Status</th>
+                <th></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pres of PrescriptionRecords">
+                <td data-label="Patient ID">{{pres.dname}}</td>
+                <td data-label="Name">{{pres.pname}}</td>
+                <td data-label="Age">{{pres.page}}</td>
+                <!--<td data-label="Email">{{pres.pemail}}</td>
+                <td data-label="Patient contact no">{{pres.pno}}</td>-->
+                <td data-label="Email">{{pres.pemail}}</td>
+                <td data-label="Days">{{pres.pdays}}</td>
+                <td data-label="Patient contact no">{{pres.pno}}</td>
+                <td data-label="Date">{{pres.pdate}}</td>
+                <td data-label="Image"><img  src="{{pres.pres}}" alt="Uploaded Image" width="50"></td>
+                <td data-label="Days">{{pres.status}}</td>
+                <td>
+                    <button class="btn edit-btn" (click)="EditRecordModal(pres)">✏️ Edit</button>
+                    <button class="btn delete-btn" (click)="deleteRecords(pres)" >🗑️ Delete</button>
+                </td>
+            </tr>
+         
+        </tbody>
+    </table>
+
+</div>
+</div>
+
+<!--Edit Details-->
+
+<div *ngIf="showEditModal" class="modal-overlay">
+  
+  <div class="modal-content" style="margin-top: 5%;">
+    
+    <div class="form-container" >
+      <form [formGroup]="editForm" (ngSubmit)="onUpdateClick()" #prescriptionForm="ngForm">
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Doctor's Name</label>
+                  <i class="fas fa-user-md"></i>
+                  <input type="text" class="form-control" placeholder="Doctor's Name" formControlName="dname" name="dname" [(ngModel)]="editPrescriptionRecord.dname" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Patient's Name</label>
+                  <i class="fas fa-user"></i>
+                  <input type="text" class="form-control" placeholder="Patient's Name" formControlName="pname" name="pname" [(ngModel)]="editPrescriptionRecord.pname" required>
+              </div>
+          </div>
+  
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Patient's Age</label>
+                  <i class="fas fa-calendar"></i>
+                  <input type="text" class="form-control" placeholder="Patient's Age" formControlName="page" name="page"  [(ngModel)]="editPrescriptionRecord.page" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Select Gender</label>
+                  <select class="form-control" formControlName="gend" name="gend" [(ngModel)]="editPrescriptionRecord.gend" required>
+                      <option value="">Select</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                  </select>
+              </div>
+          </div>
+  
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Email</label>
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="pemail" name="pemail" [(ngModel)]="editPrescriptionRecord.pemail" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>Contact No</label>
+                  <i class="fas fa-phone"></i>
+                  <input type="tel" class="form-control" placeholder="Contact Number" formControlName="pno" name="pno" [(ngModel)]="editPrescriptionRecord.pno" required>
+              </div>
+          </div>
+  
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Select date order required</label>
+                  <i class="fas fa-calendar"></i>
+                  <input type="date" class="form-control" placeholder="Select date order required" formControlName="pdate" name="pdate" [(ngModel)]="editPrescriptionRecord.pdate" required>
+              </div>
+              <div class="form-group col" style="margin-left: 5%;">
+                  <label>For How many days</label>
+                  <i class="fas fa-calendar"></i>
+                  <input type="text" class="form-control" placeholder="For How many days" formControlName="pdays" name="pdays" [(ngModel)]="editPrescriptionRecord.pdays" required>
+              </div>
+          </div>
+  
+          <div class="form-group">
+              <label>Upload your Prescription</label>
+              <input type="file" class="form-control" (change)="uploadImage($event)" name="pres" [(ngModel)]="editPrescriptionRecord.pres"/>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <button type="submit" class="btn-add" style="width: 100%;">Edit your Order</button>
+            </div>
+            <div class="form-group col" style="margin-left: 5%;">
+              <button type="submit" class="btn-add" style="width: 100%;" (click)="orderListfunction()">Cancel</button>
+            </div>
+        </div>
+  
+          
+      </form>
+  </div>
+  </div>
+</div>
+
+
+
+
+
