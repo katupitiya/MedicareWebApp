@@ -9,11 +9,13 @@ import { FirestoreModule, getFirestore, provideFirestore} from '@angular/fire/fi
 import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StoreComponent
+    StoreComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

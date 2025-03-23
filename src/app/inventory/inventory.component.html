@@ -1,0 +1,171 @@
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/aos.css">
+<link rel="stylesheet" href="css/style.css">
+
+<div class="storemain">
+  <div class="site-wrap">
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Inventory</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container"  *ngIf="inventoryComponent"  >
+      <!-- Header Row: Add Item Button & Inventory Title -->
+      <br><br>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <br><br>
+        <h3 class="mb-0">Inventory Items</h3>
+        <button (click)="showInventoryForm = true; isEditing = false;" class="btn btn-primary">➕ Add Item</button>
+      </div>
+      <br><br>
+
+      <!-- Inventory Form Modal (Add/Edit Item) -->
+      <div *ngIf="showInventoryForm" class="modal-overlay">
+        <div class="form-control">
+          <h3>{{ isEditing ? 'Edit' : 'Add' }} Inventory Item</h3>
+          <form [formGroup]="myForm">
+            <label>Product Name:</label>
+            <input type="text" formControlName="name">
+            
+            <label>Manufacturer:</label>
+            <input type="text" formControlName="manufacturer">
+            
+            <label>Problem/Condition:</label>
+            <input type="text" formControlName="problemCondition">
+            
+            <label>Category:</label>
+            <input type="text" formControlName="category">
+            
+            <label>Quantity:</label>
+            <input type="number" formControlName="quantity">
+            
+            <div class="modal-buttons">
+              <button type="button" (click)="saveItem()">💾 Save</button>
+              <button type="button" (click)="showInventoryForm = false">❌ Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+      <!-- Inventory Table -->
+      <div class="inventory-table">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Manufacturer</th>
+              <th>Condition</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of inventoryItems">
+              <td>{{ item.name }}</td>
+              <td>{{ item.manufacturer }}</td>
+              <td>{{ item.problemCondition }}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>
+                <button (click)="editItem(item)" style="margin-right: 5px;">✏️ Edit</button>
+                <button (click)="deleteItem(item.id)">🗑️ Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="container" *ngIf="inventDrugComponent">
+      <br><br>
+      <!-- Drug Management Header -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Drug Categories</h3>
+        <button (click)="addDrug()" class="btn-class1">➕ Drug Categories</button>
+      </div>
+    
+      <!-- Drug Form Modal (Add/Edit Drug) -->
+      <div *ngIf="showDrugForm" class="modal-overlay">
+        <div class="modal-content">
+          <h3>{{ isFormEditing ? 'Edit' : 'Add' }} Drug Category</h3>
+          <form [formGroup]="drugForm">
+            <label>Drug Category:</label>
+            <input type="text" formControlName="name" placeholder="Drug Name">
+            
+            <label>Description:</label>
+            <input type="text" formControlName="description" placeholder="Description">
+            
+            <div class="modal-buttons">
+              <button type="button" class="btn-class1" (click)="saveDrug()">💾 Save</button>
+              <button type="button" class="btn-class1" (click)="showDrugForm = false">❌ Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+      <!-- Drugs Table -->
+      <div class="drug-table">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Drug Category</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let drug of drugs">
+              <td>{{ drug.name }}</td>
+              <td>{{ drug.description }}</td>
+              <td>
+                <button class="edit-btn"  (click)="editDrug(drug)" style="margin-right: 5px;">✏️ Edit</button>
+                <button class="delete-btn" (click)="deleteDrug(drug.id)">🗑️ Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<style>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*background: rgba(35, 225, 254, 0.9); /* Increased opacity to fully cover background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(30px); /* Stronger blur effect */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1001; /* Ensure it appears above the overlay */
+}
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+</style>
