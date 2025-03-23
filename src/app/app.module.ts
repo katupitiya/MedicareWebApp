@@ -9,22 +9,34 @@ import { FirestoreModule, getFirestore, provideFirestore} from '@angular/fire/fi
 import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PatientComponent } from './patient/patient.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+//import { CloudinaryModule } from '@cloudinary/ng';
+import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    StoreComponent
+    StoreComponent,
+    PatientComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    
   ],
   providers: [
     FirestoreModule,
+    //AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+
   ],
   bootstrap: [AppComponent]
 })
