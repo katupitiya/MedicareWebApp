@@ -1,0 +1,78 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="assets/css/aos.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<div class="site-wrap">
+
+<div class="billing-container">
+        <h2>Billing Management</h2>
+      
+        <form [formGroup]="billingForm" (ngSubmit)="addMedicine()" class="medicine-form">
+          <div class="form-group">
+            <label>Medicine Name:</label>
+            <input type="text" formControlName="medicineName" class="form-control" placeholder="Enter medicine name" required />
+          </div>
+      
+          <div class="form-group">
+            <label>Quantity:</label>
+            <input type="number" formControlName="quantity" class="form-control" min="1" required />
+          </div>
+      
+          <div class="form-group">
+            <label>Price per Unit:</label>
+            <input type="number" formControlName="price" class="form-control" min="1" required />
+          </div>
+      
+          <button type="submit" class="btn btn-primary">Add Medicine</button>
+        </form>
+      
+        <div *ngIf="medicines.length > 0">
+          <h3>Added Medicines</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of medicines">
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price }}</td>
+                <td>${{ item.quantity * item.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+      
+          <h4>Total Amount: ${{ totalAmount }}</h4>
+      
+          <div class="form-group">
+            <label>Select Payment Method:</label>
+            <select formControlName="paymentMethod" class="form-control">
+              <option value="">Select Payment Method</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="UPI">UPI</option>
+              <option value="Cash">Cash</option>
+            </select>
+          </div>
+      
+          <button (click)="payBill()" class="btn btn-success" [disabled]="isPaid || totalAmount === 0">
+            {{ isPaid ? 'Paid' : 'Pay Now' }}
+          </button>
+        </div>
+      </div>
+   
+    <!---->
+    
+</div>

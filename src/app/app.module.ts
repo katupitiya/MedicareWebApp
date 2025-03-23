@@ -9,17 +9,18 @@ import { FirestoreModule, getFirestore, provideFirestore} from '@angular/fire/fi
 import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BillingComponent } from './billing/billing.component';
 import { PatientComponent } from './patient/patient.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 //import { CloudinaryModule } from '@cloudinary/ng';
 import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     StoreComponent,
+    BillingComponent
     PatientComponent,
   ],
   imports: [
