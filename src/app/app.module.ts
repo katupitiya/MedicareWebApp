@@ -6,9 +6,12 @@ import { AppComponent } from './app.component';
 import { StoreComponent } from './store/store.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { FirestoreModule, getFirestore, provideFirestore} from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { UserAuthService } from './user-auth.service';
 import { InventoryComponent } from './inventory/inventory.component';
 import { BillingComponent } from './billing/billing.component';
 import { PatientComponent } from './patient/patient.component';
@@ -21,6 +24,7 @@ import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
   declarations: [
     AppComponent,
     StoreComponent,
+    LoginComponent,    
     InventoryComponent
     BillingComponent
     PatientComponent,
@@ -39,7 +43,8 @@ import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
     //AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-
+      // Provide Firebase Auth
+      provideAuth(() => getAuth())
   ],
   bootstrap: [AppComponent]
 })
