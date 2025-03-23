@@ -6,14 +6,18 @@ import { AppComponent } from './app.component';
 import { StoreComponent } from './store/store.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { FirestoreModule, getFirestore, provideFirestore} from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { UserAuthService } from './user-auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StoreComponent
+    StoreComponent,
+    LoginComponent,    
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [
     FirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+      // Provide Firebase Auth
+      provideAuth(() => getAuth())
   ],
   bootstrap: [AppComponent]
 })
