@@ -137,8 +137,10 @@
                   </button>
               </ng-template>
           </div>
-          <div><button style="background: none; color: #6cc424; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; outline: none;">Manage Users</button></div>
-      </div>
+          <div *ngIf="admin">
+          <div><button  (click)="loadManageUser()" style="background: none; color: #6cc424; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; outline: none;">⚙️Manage Users</button></div>
+        </div>
+        </div>
   </div>
   <!-- test horizontal ends-->
 </div>
@@ -147,6 +149,9 @@
     <div class="site-blocks-cover backgroundImg" *ngIf="showLoginPage">
       <app-login  (close)="hideModal($event)" [login]="message" (userName)="receiveData($event)" (userLoged)="hideModal($event)" (userSignUpSuccess)="hideWhenSuccessSignUp($event)"></app-login>
       
+    </div>
+ 	<div *ngIf="showManageUser">
+      <app-manage-user  (closeManageUser)="hideModal($event)"></app-manage-user>
     </div>
     <div class="site-blocks-cover backgroundImg" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent" >
 

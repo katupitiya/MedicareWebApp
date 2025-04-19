@@ -1,0 +1,68 @@
+<div class="container-model">
+  <div class="modal-overlay" (click)="closeModal()" ><!--(click)="closeModal()"-->
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2 style="color: black;">Manage Staff Details  </h2>
+<!-- table  -->
+<div class="table-container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            <ng-container *ngIf="!user.isEdit; else editName">
+              {{ user.name }}
+            </ng-container>
+            <ng-template #editName>
+              <input [(ngModel)]="editedUser.name" />
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!user.isEdit; else editEmail">
+              {{ user.email }}
+            </ng-container>
+            <ng-template #editEmail>
+              <input [(ngModel)]="editedUser.email" />
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!user.isEdit; else editPwd">
+              {{ user.pwd }}
+            </ng-container>
+            <ng-template #editPwd>
+              <input [(ngModel)]="editedUser.pwd" />
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!user.isEdit; else editButtons">
+              <button (click)="editUser(user)" style="margin-right: 5px;">✏️ Edit</button>
+              <button (click)="deleteUser(user.id)">🗑️Delete</button>
+            </ng-container>
+            <ng-template #editButtons>
+              <button (click)="saveUser(user)">Save</button>
+              <button (click)="cancelEdit(user)">Cancel</button>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--end of table-->
+  <div class=" button-bottm">
+  <button (click)="createUser()" style="margin-right: 5px;"> Create User</button>
+  <button (click)="closeModal()">Cancel</button>
+  </div>
+  </div>
+  <div *ngIf="isUserCreate">
+    <h1>{{isUserCreate}}</h1>
+    <app-login  (close)="hideModal($event)" ></app-login>
+  </div>
+  </div>
+  </div>
+  

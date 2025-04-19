@@ -14,6 +14,7 @@ import { SupplyManagementComponent } from './supply-management/supply-management
 export class AppComponent {
   title = 'MedicareWebApp';
   showLoginPage=false;
+ showManageUser=false;
   currentTimeOfDay: string = '';
   constructor(private router: Router,private userAuthService:UserAuthService) {
     this.showLoginPage=false;
@@ -35,7 +36,7 @@ export class AppComponent {
   showPatientComponent = false;
   showPatientOrderList=false;
   parentMessage='test';
-
+admin=true;//Oshadhi
   toggleComponent() {
     this.showComponent = !this.showComponent; // Toggle visibility on button click
     //this.router.navigate(['/store']);
@@ -53,6 +54,7 @@ export class AppComponent {
   //  this.isModalVisible = false;
      this.message =false;
     this.showLoginPage=false;
+    this.showManageUser=false;
     if(typeof data=='boolean'){
         //this.isLogIn=true;
         
@@ -139,5 +141,9 @@ export class AppComponent {
   patientComponentOrder(){
      this.showPatientComponent = !this.showPatientComponent;
   }
+   loadManageUser(){//Oshadhi
+      this.showManageUser=true;
+    }
+
 
 }
