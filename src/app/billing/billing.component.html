@@ -171,7 +171,160 @@
         </div>
       </div>
     </div>
-
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="billing-container">
+            <h2 class="mb-3">Place Your Order</h2>
+            <div class="bg-white py-3 px-4 rounded">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="patientName">Patient Name:</label>
+                    <input type="text" class="form-control" id="patientName" value="Prasadani Sakalasuriya" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="patientAge">Patient Age:</label>
+                    <input type="text" class="form-control" id="patientAge" value="28" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="doctorName">Doctor Name:</label>
+                <input type="text" class="form-control" id="doctorName" value="Dr. Nimal Perera" readonly>
+              </div>
+    
+              <h3 class="mt-4">Medicines</h3>
+              <table class="table site-block-order-table mb-5">
+                <thead>
+                  <tr>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (LKR)</th>
+                    <th>Total Price (LKR)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Panadol</td>
+                    <td>
+                      <div class="input-group mb-2" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-secondary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center" value="2" placeholder=""
+                          aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary js-btn-plus" type="button">&plus;</button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>10.00</td>
+                    <td>20.00</td>
+                  </tr>
+                  <tr>
+                    <td>Amoxicillin</td>
+                    <td>
+                      <div class="input-group mb-2" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-secondary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center" value="1" placeholder=""
+                          aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary js-btn-plus" type="button">&plus;</button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>15.00</td>
+                    <td>15.00</td>
+                  </tr>
+                  <tr>
+                    <td>Cough Syrup</td>
+                    <td>
+                      <div class="input-group mb-2" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-secondary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center" value="1" placeholder=""
+                          aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary js-btn-plus" type="button">&plus;</button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>8.00</td>
+                    <td>8.00</td>
+                  </tr>
+                  <tr>
+                    <td class="font-weight-bold">Total Amount:</td>
+                    <td></td>
+                    <td></td>
+                    <td class="font-weight-bold">43.00 LKR</td>
+                  </tr>
+                </tbody>
+              </table>
+    
+              <div class="form-group">
+                <label for="paymentMethod">Select Payment Method:</label>
+                <select class="form-control" id="paymentMethod">
+                  <option value="">Select Payment Method</option>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="Debit Card">Debit Card</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+    
+              <button class="btn btn-primary btn-lg btn-block">Pay Now</button>
+            </div>
+          </div>
+    
+          <h3 class="mt-5">Order Summary</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Total Items</th>
+                <th>Total Amount (LKR)</th>
+                <th>Payment Method</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ORD-20250420-001</td>
+                <td>2025-04-20</td>
+                <td>3</td>
+                <td>43.00</td>
+                <td>Cash</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td>ORD-20250419-005</td>
+                <td>2025-04-19</td>
+                <td>5</td>
+                <td>75.50</td>
+                <td>Credit Card</td>
+                <td>Delivered</td>
+              </tr>
+              <tr>
+                <td>ORD-20250418-012</td>
+                <td>2025-04-18</td>
+                <td>2</td>
+                <td>28.00</td>
+                <td>UPI</td>
+                <td>Shipped</td>
+              </tr>
+              </tbody>
+          </table>
+    
+        </div>
+      </div>
+    </div>
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
