@@ -10,12 +10,14 @@ import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InventoryComponent } from './inventory/inventory.component';
+import { SupplyManagementComponent } from './supply-management/supply-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StoreComponent,
-    InventoryComponent
+    InventoryComponent,
+    SupplyManagementComponent
   ],
   imports: [
     BrowserModule,
