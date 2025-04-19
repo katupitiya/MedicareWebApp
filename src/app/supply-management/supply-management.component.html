@@ -1,0 +1,91 @@
+<!-- Order Request Form -->
+<div class="storemain">
+<div class="">
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Supplier</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+<br><br>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">Order Requests</h3>
+  <button (click)="showOrderForm = true" class="btn-class1">➕ Add Order Request</button>
+</div>
+
+<!-- Order Request Modal -->
+<div  *ngIf="showOrderForm" class="modal-overlay">
+  <div class="modal-content">
+    <h3>{{ isEditingOrder ? 'Edit' : 'Add' }} Order Request</h3>
+    <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+      <label>Drug Category:</label>
+      <input formControlName="drugCategory" />
+
+      <label>Item Name:</label>
+      <input formControlName="itemName" />
+   
+      <label>Quantity:</label>
+      <input type="number" formControlName="quantity" />
+
+      <label>Unit:</label>
+      <input formControlName="unit" />
+
+      <label>Stregnth:</label>
+      <input formControlName="stregnth" />
+
+      <label>Needed By:</label>
+      <input type="date" formControlName="neededBy" />
+
+      <label>Supplier ID:</label>
+      <input formControlName="supplierId" />
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-class1" [disabled]="orderForm.invalid">💾 Save</button>
+        <button type="button" class="btn-class1" (click)="cancelOrderForm()">❌ Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Order Requests Display in Table -->
+
+<table *ngIf="orderRequests.length > 0">
+  <thead>
+    <tr>
+      <th>Drug Category</th>
+      <th>Drug Name</th>
+      <th>Quantity</th>
+      <th>Unit</th>
+      <th>Stregnth</th>
+      <th>Supplier ID</th>
+      <th>Needed By</th>
+      <th>Created Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orderRequests">
+      <td>{{ order.drugCategory }}</td>
+      <td>{{ order.itemName }}</td>
+      <td>{{ order.quantity }}</td>
+      <td>{{ order.unit }}</td>
+      <td>{{ order.stregnth }}</td>
+      <td>{{ order.supplierId }}</td>
+      <td>{{ order.neededBy }}</td>
+      <td>{{ order.createdDate?.toDate() | date: 'short' }}</td>
+      <td>
+        <button class="edit-btn" (click)="editOrder(order)" style="margin-right: 5px;">✏️ Edit</button>
+        <button class="delete-btn" (click)="deleteOrder(order.id)">❌ Cancel</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="orderRequests.length === 0">No order requests available.</div>
+
+<hr />
+</div>
+
+<!-- Supplier Form -->

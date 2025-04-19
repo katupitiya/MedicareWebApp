@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from './user-auth.service';
 import { InventoryComponent } from './inventory/inventory.component';
-import { Component, Input } from '@angular/core';
+import { SupplyManagementComponent } from './supply-management/supply-management.component';
+
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,8 @@ export class AppComponent {
   isLogout:boolean=true;
   inventoryComponent =false;
   inventDrugComponent=false;
+  supplierComponent=false;
+ 
   selectedSection: string = 'manage'; // Default section
   showPatientComponent = false;
   showPatientOrderList=false;
@@ -123,6 +126,14 @@ export class AppComponent {
     console.log('InventoryComponent - selectedSection ww:', this.selectedSection);
     this.inventoryComponent = false;
     this.inventDrugComponent = !this.inventDrugComponent;
+  }
+  showSupplierComponent(){
+    this.selectedSection = 'suppliers';
+    console.log('SupplyManagementComponent - selectedSection ww:', this.selectedSection);
+    this.inventoryComponent = false;
+    this.inventDrugComponent =false;
+    this.supplierComponent = !this.supplierComponent;
+
   }
 
   patientComponentOrder(){

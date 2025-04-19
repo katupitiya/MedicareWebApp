@@ -92,6 +92,13 @@
                   <li><a href="#" (click)="selectedSection = 'locations'">Inventory Locations</a></li>
                 </ul>
                 </li>
+                <li class="has-children">
+                  <a>Supply Mangement</a>
+                <ul class="dropdown">
+                  <li><a (click)="showinventComponent()"  *ngIf="!inventoryComponent" (click)="selectedSection = 'supplier'">Manage Suppliers</a></li>
+                  <li><a (click)="showinventComponent()"  *ngIf="!inventoryComponent" (click)="selectedSection = 'suprequest'">Supplier Requests</a></li>
+                </ul>
+                </li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
               </ul>
@@ -380,13 +387,16 @@
       </div>
     </div>
 
-    <!--<div *ngIf="showComponent">
+    <div *ngIf="showComponent">
       <app-store></app-store>
     </div>
     <div *ngIf="inventoryComponent">
       <app-inventory [selectedSection]="selectedSection"></app-inventory>
     </div>
-    </div>-->
+
+    <div *ngIf="showSupplierComponent">
+      <app-supply-management [selectedSection]="selectedSection"></app-supply-management>
+    </div>
     <footer class="site-footer">
       <div class="container">
         <div class="row">

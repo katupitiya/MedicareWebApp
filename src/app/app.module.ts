@@ -13,20 +13,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { UserAuthService } from './user-auth.service';
 import { InventoryComponent } from './inventory/inventory.component';
+import { SupplyManagementComponent } from './supply-management/supply-management.component';
 import { BillingComponent } from './billing/billing.component';
 import { PatientComponent } from './patient/patient.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 //import { CloudinaryModule } from '@cloudinary/ng';
-import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+//port {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 
 @NgModule({
   declarations: [
     AppComponent,
     StoreComponent,
+    InventoryComponent,
+    SupplyManagementComponent,
     LoginComponent,    
-    InventoryComponent
-    BillingComponent
+    BillingComponent,
     PatientComponent,
   ],
   imports: [
