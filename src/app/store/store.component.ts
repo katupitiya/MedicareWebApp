@@ -25,6 +25,8 @@ export class StoreComponent {
        pname: new FormControl(''),
        page: new FormControl(''),
      });
+
+     
    }
 
   addPrescriptionData(){

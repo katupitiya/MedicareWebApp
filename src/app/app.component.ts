@@ -12,6 +12,8 @@ export class AppComponent {
   showComponent = false; // Controls the visibility of MyNewComponent
   showPatientComponent = false;
   showPatientOrderList=false;
+  showPharmacyComponent=false;
+  showPatientOrderComponent = false;
   parentMessage='test';
 
   toggleComponent() {
@@ -19,8 +21,21 @@ export class AppComponent {
   }
 
   patientComponentOrder(){
-     this.showPatientComponent = !this.showPatientComponent;
+    this.showPatientOrderComponent = !this.showPatientOrderComponent;
+     this.showPatientComponent = true;
+     this.showPharmacyComponent = false;
   }
 
+  Pharmacycomponent(){
+    this.showPharmacyComponent = !this.showPharmacyComponent;
+    this.showPatientComponent=true;
+    this.showPatientOrderComponent = false;
+  }
+
+  Pharmacycart(){
+    this.showPharmacyComponent = !this.showPharmacyComponent;
+    this.showPatientComponent=true;
+    this.showPatientOrderComponent = false;
+  }
 
 }

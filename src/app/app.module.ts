@@ -14,6 +14,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 //import { CloudinaryModule } from '@cloudinary/ng';
 import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+import { PharmacistComponent } from './pharmacist/pharmacist.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
     AppComponent,
     StoreComponent,
     PatientComponent,
+    PharmacistComponent,
   ],
   imports: [
     BrowserModule,
