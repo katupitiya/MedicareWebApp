@@ -35,6 +35,8 @@ export class AppComponent {
   selectedSection: string = 'manage'; // Default section
   showPatientComponent = false;
   showPatientOrderList=false;
+  showPharmacyComponent=false;
+  showPatientOrderComponent = false;
   parentMessage='test';
 admin=true;//Oshadhi
   toggleComponent() {
@@ -139,11 +141,24 @@ admin=true;//Oshadhi
   }
 
   patientComponentOrder(){
-     this.showPatientComponent = !this.showPatientComponent;
+    this.showPatientOrderComponent = !this.showPatientOrderComponent;
+     this.showPatientComponent = true;
+     this.showPharmacyComponent = false;
   }
    loadManageUser(){//Oshadhi
       this.showManageUser=true;
     }
 
+  Pharmacycomponent(){
+    this.showPharmacyComponent = !this.showPharmacyComponent;
+    this.showPatientComponent=true;
+    this.showPatientOrderComponent = false;
+  }
+
+  Pharmacycart(){
+    this.showPharmacyComponent = !this.showPharmacyComponent;
+    this.showPatientComponent=true;
+    this.showPatientOrderComponent = false;
+  }
 
 }

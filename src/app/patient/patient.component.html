@@ -69,7 +69,7 @@
           <div class="form-row">
             <div class="form-group col">
                 <label>Medicine allergies?<span class="required">*</span></label>
-                <select class="form-control" formControlName="gend" name="gend" required>
+                <select class="form-control" formControlName="mallergies" name="gend" required>
                     <option value="">Please Select</option>
                     <option value="male">Yes</option>
                     <option value="female">No</option>
@@ -78,7 +78,7 @@
             <div class="form-group col" style="margin-left: 5%;">
                 <label>Describe allergies</label>
                 <i class="fas fa-calendar"></i>
-                <textarea class="form-control" placeholder="Patient's Age" formControlName="page" name="page" required></textarea>
+                <textarea class="form-control" placeholder="Patient's Age" formControlName="allergies" name="page" required></textarea>
             </div>
         </div>
   
@@ -90,7 +90,7 @@
               </div>
               <div class="form-group col" style="margin-left: 5%;">
                   <label>Duration <span class="required">*</span></label>
-                  <select class="form-control" formControlName="pdays" name="pdays" required>
+                  <select class="form-control" formControlName="duration" name="pdays" required>
                     <option value="">Please Select</option>
                     <option value="1 Week">1 Week</option>
                     <option value="2 Week">2 Week</option>
@@ -105,7 +105,7 @@
           <div class="form-row">
             <div class="form-group col">
                 <label>Frequency<span class="required">*</span></label>
-                <select class="form-control" formControlName="pdays" name="pdays" required>
+                <select class="form-control" formControlName="frequency" name="pdays" required>
                   <option value="">Please Select</option>
                   <option value="One Time">One Time</option>
                   <option value="On Going">On Going</option>
@@ -114,7 +114,7 @@
             <div class="form-group col" style="margin-left: 5%;">
                 <label>Special Notes</label>
                 <i class="fas fa-calendar"></i>
-                <textarea class="form-control" placeholder="Patient's Age" formControlName="page" name="page" required></textarea>
+                <textarea class="form-control" placeholder="Patient's Age" formControlName="note" name="page" required></textarea>
             </div>
         </div>
   
@@ -135,6 +135,10 @@
 
 <div *ngIf="orderList" >
   <div class="bg-light py-3" *ngIf="!showPatientManagment">
+
+    
+
+      <br><br>
     <div class="container">
       <div class="row">
         <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Patient Managment</strong><span class="mx-2 mb-0">/</span><strong class="text-black">View your Orders</strong>

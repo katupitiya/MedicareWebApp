@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { CollectionReference, Firestore, Timestamp, addDoc, collection, collectionData, doc, updateDoc,deleteDoc, docData } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 //View records for firebase
@@ -11,6 +11,11 @@ export interface Prescription{
   page?: string;
   pemail?:string;
   pno?:string;
+  Mallergies?:string;
+  allergies?:string;
+  duration?:string;
+  frequency?:string;
+  note?:string;
   pdate?:string;
   pdays?:string;
   pres?:string;
@@ -26,10 +31,8 @@ export interface Prescription{
 
 export class PatientComponent {
 
- // @Input() message: string = ''; 
-  //component visibility
+
   orderMedicine ;
-  //mainpage;
   orderList;
   showPatientManagment= false; //enable patient managment section
   PrescriptionRecords: Prescription[] = [];//view list
@@ -39,34 +42,39 @@ export class PatientComponent {
   editForm: FormGroup;
   isVisible: boolean = false;
 
-  selectedFile: File | null = null;
+   selectedFile: File | null = null;
    db: Firestore = inject(Firestore);
    imageUrl: string | null = null;
     
     prescriptionCollection = collection(this.db, 'pharmacyPrescription'); // use in prescription submit form 
     prescription = { id:'',dname: '', pname: '', page:'',gend:'',pemail:'',pno:'',pdate:'',pdays:'',pres:'',status:''}; 
     myForm: FormGroup;
-    //editPrescriptionRecord!: Prescription;
 
-    constructor() {
-      
+    constructor(private fb: FormBuilder) {
+
      this.orderMedicine = false;
-     //this.mainpage= true;
      this.orderList= true;
 
+     //submit prescription form
       this.myForm = new FormGroup({
-         dname: new FormControl(''), // Initial value
-         pname: new FormControl(''),
-         page: new FormControl(''),
-         gend:new FormControl(''),
-         pemail:new FormControl(''),
-         pno:new FormControl(''),
-         pdate:new FormControl(''),
-         pdays:new FormControl(''),
-         pres:new FormControl(''),
-         status:new FormControl(''),
+        dname: new FormControl(''), // Initial value
+        pname: new FormControl(''),
+        page: new FormControl(''),
+        gend:new FormControl(''),
+        pemail:new FormControl(''),
+        pno:new FormControl(''),
+        Mallergies:new FormControl(''),
+        allergies:new FormControl(''),
+        duration:new FormControl(''),
+        frequency:new FormControl(''),
+        note:new FormControl(''),
+        pdate:new FormControl(''),
+        pdays:new FormControl(''),
+        pres:new FormControl(''),
+        status:new FormControl(''),
        });
 
+      //edit prescription form
        this.editForm = new FormGroup({
         dname: new FormControl(''), // Initial value
         pname: new FormControl(''),
@@ -74,6 +82,11 @@ export class PatientComponent {
         gend:new FormControl(''),
         pemail:new FormControl(''),
         pno:new FormControl(''),
+        Mallergies:new FormControl(''),
+        allergies:new FormControl(''),
+        duration:new FormControl(''),
+        frequency:new FormControl(''),
+        note:new FormControl(''),
         pdate:new FormControl(''),
         pdays:new FormControl(''),
         pres:new FormControl(''),
@@ -97,7 +110,10 @@ export class PatientComponent {
       }
     }
   
-  async addPrescriptionDB(prescription: { dname: string; pname: string; page: string;gend:string,pemail:string,pno:string,pdate:string,pdays:string;pres:string;status:string}) {
+  async addPrescriptionDB(prescription: { dname: string; pname: string; page: string;gend:string,pemail:string,pno:string,pdate:string,pdays:string;Mallergies:string;allergies:string;
+    duration:string;
+    frequency:string;
+    note:string;pres:string;status:string}) {
     try {
       const docRef = await addDoc(this.prescriptionCollection, prescription);
       console.log('record added with ID:', docRef.id);
@@ -233,6 +249,37 @@ export class PatientComponent {
       console.error('Error updating :', error);
     }
     this.orderListfunction();
+  }
+
+ 
+
+
+  submitForm() {
+    if (this.myForm.valid) {
+      console.log('Form Data:', this.myForm.value);
+    }
+  }
+
+  get rows(): FormArray {
+    return this.myForm.get('rows') as FormArray;
+  }
+
+  createRow(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      age: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+    });
+  }
+
+  addRow() {
+    this.rows.push(this.createRow());
+  }
+
+  removeRow(index: number) {
+    if (this.rows.length > 1) {
+      this.rows.removeAt(index);
+    }
   }
   
 }

@@ -1,0 +1,345 @@
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+  <link rel="stylesheet" href="css/aos.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+
+   <!--Prescription Data form-->
+   <div>
+    <div class="bg-light py-3" *ngIf="!showPatientManagment">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Patient Managment</strong><span class="mx-2 mb-0">/</span><strong class="text-black">List of Order Requests</strong></div>
+        </div>
+      </div>
+    </div>
+    
+    
+  
+  <!---->
+
+</div>
+<div class="icons" style="margin-left:1500px;" >
+  <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+  <a (click)="testmethod()" class="icons-btn d-inline-block bag">
+    <h4>🛒 Shopping Cart</h4>
+    <span class="number" style="margin-right:-15px;">2</span>
+  </a>
+  <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+      class="icon-menu"></span></a>
+</div>
+
+<!--List of Table-->
+
+<div *ngIf="orderList" >
+ 
+  <div class="table-container">
+   
+    <!--<h2 style="color:#222f67">List of your Orders</h2>-->
+    <table>
+        <thead>
+            <tr>
+                <th>Doctor's Name</th>
+                <th>Patient's Name</th>
+                <th>Age</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Phone No</th>
+                <th>Date of Order</th>
+                <th>Prescription</th>
+                <th>Status</th>
+                <th></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pres of PrescriptionRecords">
+                <td data-label="Patient ID">{{pres.dname}}</td>
+                <td data-label="Name">{{pres.pname}}</td>
+                <td data-label="Age">{{pres.page}}</td>
+                <!--<td data-label="Email">{{pres.pemail}}</td>
+                <td data-label="Patient contact no">{{pres.pno}}</td>-->
+                <td data-label="Email">{{pres.frequency}}</td>
+                <td data-label="Days">{{pres.duration}}</td>
+                <td data-label="Patient contact no">{{pres.pno}}</td>
+                <td data-label="Date">{{pres.pdate}}</td>
+                <td data-label="Image"><!--<img  src="{{pres.pres}}" alt="Uploaded Image" width="50">-->
+                <!--<button (click)="downloadImage(pres)" class="btn btn-success">Download</button>-->
+                <button class="btn download-btn" (click)="downloadImage(pres)">⬇️ Download</button>
+                </td>
+                <td data-label="Days">{{pres.status}}</td>
+                <td>
+                  <button 
+                  class="btn edit-btn" 
+                  (click)="approvalMethod(pres)" 
+                  [disabled]="pres.status === 'Approved'">
+                  Pending Approval
+                </button>
+                    
+                </td>
+            </tr>
+         
+        </tbody>
+    </table>
+
+</div>
+</div>
+
+<!--<div class="bg-light py-3" *ngIf="showMedicineAddForm">-->
+
+   <!--<div class="container">
+        <h2>Dynamic Form</h2>
+        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+         
+              <label>Name:</label>
+              <input type="text" formControlName="name" class="form-control" required />
+      
+              <label>Email:</label>
+              <input type="email" formControlName="email" class="form-control" required />
+              <div formArrayName="rows">
+                <div *ngFor="let row of rows.controls; let i = index" [formGroupName]="i" class="row mb-3">
+                  
+              <label>Age:</label>
+              <input type="text" formControlName="age" class="form-control" required />
+      
+              <button type="button" (click)="removeRow(i)" class="btn btn-danger mt-2" *ngIf="rows.length > 1">Remove</button>
+            </div>
+          </div>
+      
+          <button type="button" (click)="addRow()" class="btn btn-primary">Add Row</button>
+          <button type="submit" [disabled]="!myForm.valid" class="btn btn-success">Submit</button>
+        </form>
+      </div>-->
+
+      <br><br>
+    <!--<div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Patient Managment</strong><span class="mx-2 mb-0">/</span><strong class="text-black">View your Orders</strong>-->
+          <!--<button style="margin-left:1000px;" class="btn-add" (click)="orderMedicinefunction()">Add your Order</button>-->
+       <!-- </div>
+        
+      </div>
+    </div>-->
+
+    <div class="form-container" style="margin-top: 2%;" *ngIf="showMedicineAddForm">
+      <form [formGroup]="myForm" (ngSubmit)="submitOrder()" class="prescription-form">
+        <h2>Prescription Form</h2>
+      
+        <div class="form-row">
+          <div class="form-group col">
+            <label>Doctor's Name:</label>
+            <input type="text" class="form-control" formControlName="dname" [(ngModel)]="editPrescriptionRecord.dname" readonly>
+          </div>
+          <div class="form-group col">
+            <label>Patient's Name:</label>
+            <input type="text" class="form-control" formControlName="pname" [(ngModel)]="editPrescriptionRecord.pname" readonly>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col">
+            <label>Age:</label>
+            <input type="text" class="form-control" formControlName="page" [(ngModel)]="editPrescriptionRecord.page" readonly>
+          </div>
+          <div class="form-group col">
+            <label>Ordered date:</label>
+            <input type="text" class="form-control" formControlName="pdate" [(ngModel)]="editPrescriptionRecord.pdate" readonly>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col">
+              <label>Email</label>
+              <i class="fas fa-envelope"></i>
+              <input type="email" class="form-control" placeholder="Email" formControlName="pemail" name="pemail" [(ngModel)]="editPrescriptionRecord.pemail" required>
+          </div>
+          <div class="form-group col">
+              <label>Contact No</label>
+              <i class="fas fa-phone"></i>
+              <input type="tel" class="form-control" placeholder="Contact Number" formControlName="pno" name="pno" [(ngModel)]="editPrescriptionRecord.pno" required>
+          </div>
+      </div>
+      
+
+        <div formArrayName="drugs">
+          <div *ngFor="let row of drugs.controls; let i = index" [formGroupName]="i" class="drug-row">
+            <label>Search Drug:</label>
+            <div class="search-container">
+              <input type="text" formControlName="searchText" placeholder="Enter drug name..." class="search-box">
+              <button type="button" (click)="searchDrug(i)" class="search-button">🔍</button>
+            </div>
+      <br><br>
+
+
+     
+        <div *ngIf="row.get('name')?.value" class="drug-details">
+        
+              <p><strong>Name:</strong> {{ row.get('name')?.value }}</p>
+              <p><strong>Stock Quantity:</strong> {{ row.get('quantity')?.value }}</p>
+              <p><strong>Price:</strong> ${{ row.get('price')?.value }}</p>
+              <p><strong>Order Quantity:</strong></p>
+
+              <div class="form-row">
+                <div class="form-group col">
+              <input type="number" formControlName="orderQuantity" min="1" class="order-quantity">
+            </div>
+              
+              <div class="form-group col" style="margin-top: -100px;">
+              <p><strong>Steps to use:</strong></p>
+              
+                <textarea type="textarea" class="form-control" placeholder="" formControlName="steps"  class="order-quantity"></textarea>
+              </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                    <label>Deside time Duration</label>
+                    
+                    <input type="text" class="form-control" placeholder="Time Duration" formControlName="timeduration" name="timeduration" >
+                </div>
+                <div class="form-group col">
+                    <label>Ordered Time Duration</label>
+                   
+                    <input type="text" class="form-control" placeholder="Ordered Time Duration" formControlName="otimeduration" name="otimeduration" >
+                </div>
+            </div>
+              <button type="button" (click)="addToCart(i)" class="btn btn-success">➕ Add to Cart</button>
+            
+        
+      
+           <!--<button type="button" (click)="removeRow(i)" class="btn btn-danger" *ngIf="drugs.length > 1">Remove</button>-->
+          </div>
+        
+          
+
+        
+        </div></div>
+      <br><br>
+        <h3>🛒 Shopping Cart</h3>
+        <table class="cart-table" *ngIf="cart.length > 0">
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let item of cart; let i = index">
+            <td>{{ item.name }}</td>
+            <td>${{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.total }}</td>
+            <td><button (click)="removeFromCart(i)" class="btn btn-danger">❌ Remove</button></td>
+          </tr>
+        </table>
+      <br><br>
+        <h4 *ngIf="cart.length > 0">Total Cost: ${{ totalCost }}</h4>
+      
+        <button type="submit" class="btn-submit" [disabled]="cart.length === 0">✅ Place Order</button>
+      </form>
+      
+      
+      </div>
+
+      <div *ngIf="orderListPharmacy">
+        <div class="table-container">
+          <h2 class="table-title">📜 Prescription Orders</h2>
+      
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>👨‍⚕️ Doctor</th>
+                <th>👤 Patient</th>
+                <th>🎂 Age</th>
+                <th>📅 Order Date</th>
+                <th>📩 Email</th>
+                <th>📞 Contact</th>
+                <th>📄 Prescription</th>
+                <th>💰 Total Cost</th>
+                <th>🚦 Status</th>
+                <th></th>
+                <th>🔧 Actions</th>
+              </tr>
+            </thead>
+      
+            <tbody>
+              <ng-container *ngFor="let pres of MedicineRecords2; let i = index">
+                <!-- ✅ Main Order Row -->
+                <tr>
+                  <td>{{ pres.doctorName}}</td>
+                  <td>{{ pres.patientName}}</td>
+                  <td>{{ pres.patientAge}}</td>
+                  <td>{{ pres.patientContact}}</td>
+                  <td>{{ pres.pemail }}</td>
+                  <td>{{ pres.pno }}</td>
+                  <td>
+                    <button class="btn download-btn" (click)="downloadImage(pres)">
+                      ⬇️ Download
+                    </button>
+                  </td>
+                  <td>{{ pres.totalCost }}</td>
+                  <td>{{pres.Status}}</td>
+                  <td>
+                    <span class="status-badge" [ngClass]="{
+                      'approved': pres.status === 'Approved',
+                      'pending': pres.status === 'Pending'
+                    }">
+                      {{ pres.status }}
+                    </span>
+                  </td>
+                  <td>
+                    <button class="btn view-btn" (click)="toggleDetails(i)">
+                      {{ expandedIndex === i ? '🔼 Hide' : '🔽 View' }}
+                    </button>
+                  </td>
+                </tr>
+      
+                <tr *ngIf="expandedIndex === i" class="expanded-row">
+                  <td colspan="9">
+                    <div class="details-container">
+                      <h4>🧾 Prescription Details</h4>
+                      <div class="drug-list">
+                        <div *ngFor="let drug of pres.cartItems" class="drug-card">
+                          <strong>💊 Name: {{ drug.name }}</strong><br>
+                          <span>📦 Stock: {{ drug.stock }}</span><br>
+                          <span>💰 Price: ${{ drug.price }}</span><br>
+                          <span>🔢 Qty: {{ drug.quantity }}</span><br>
+                          <span>📖 Usage: {{ drug.steps }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      
+       
+
+   
+
+    
+
+
+
+
+
+
+
+

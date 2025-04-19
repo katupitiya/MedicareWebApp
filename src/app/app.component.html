@@ -80,8 +80,8 @@
                 <li class="has-children">
                   <a href="#">Patient Managment</a>
                   <ul class="dropdown">
-                    <li><a (click)="patientComponentOrder()">View Your Orders</a></li>
-                    <li><a></a></li>
+                    <li><a (click)="patientComponentOrder()" *ngIf="!showPharmacyComponent">View Your Orders</a></li>
+                    <li><a (click)="Pharmacycomponent()">View Request Orders</a></li>
                   </ul>
                 </li>
                 <li class="has-children">
@@ -104,6 +104,19 @@
               </ul>
             </nav>
           </div>
+          
+          <div class="icons" *ngIf="!showPharmacyComponent">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a (click)="Pharmacycart()" class="icons-btn d-inline-block bag">
+              <span class="icon-shopping-bag"></span>
+              <span class="number">2</span>
+            </a>
+            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+                class="icon-menu"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
           <!-- Icons Section (Left) -->
           <div class="ml-auto d-flex align-items-center">
@@ -360,8 +373,13 @@
       </div>
     </div>
 
+    <div *ngIf="showPatientOrderComponent">
     <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');" *ngIf="!showComponent && !inventoryComponent && showPatientComponent">
       <app-patient></app-patient>
+    </div>
+
+    <div *ngIf="showPharmacyComponent">
+      <app-pharmacist></app-pharmacist>
     </div>
 
      <div *ngIf="showComponent">

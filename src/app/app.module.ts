@@ -19,7 +19,9 @@ import { PatientComponent } from './patient/patient.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 //import { CloudinaryModule } from '@cloudinary/ng';
-//port {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+import {Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+import { PharmacistComponent } from './pharmacist/pharmacist.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     LoginComponent,    
     BillingComponent,
     PatientComponent,
+    PharmacistComponent,
   ],
   imports: [
     BrowserModule,
