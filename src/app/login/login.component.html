@@ -1,0 +1,163 @@
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+  <link rel="stylesheet" href="css/aos.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+<div class="container-model">
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <!-- <h2>Modal Title</h2>
+      <p>This is the content of the modal. It can include text, images, forms, or any other Angular component.</p> -->
+      
+      <!-- <h1>{{login}}</h1>
+       <h1>{{loginTest}}</h1> -->
+       <!--test style start 1-->
+       <!-- <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="card p-4 shadow"> -->
+       <!--test style 1-->
+       <div class="form-container">
+        <!-- <button>❌ Close</button> -->
+
+       <h2 style="color: black;">Login / Sign Up  </h2>
+      <form [formGroup]="userForm" (ngSubmit)="addUser()" >
+        <!-- First Name -->
+        <div ><!--class="mb-3"-->
+          <div class="form-group ">
+            <div  style="border: border-left;  text-align: left;margin-bottom: 2px"> 
+               <label for="firstname" class="form-label" style="margin-bottom: 2px"><strong>First Name</strong>
+              </label>
+            </div>
+          <div class="form-group">  <!--style="border: border-left;padding-bottom: 5px; margin-top: 0;"-->
+            <input
+            type="text"
+            class="form-control inputclass"
+            id="validationCustom01"
+            placeholder="First Name"
+            name="firstname"
+            formControlName="firstname"
+            [class.is-invalid]="firstname && firstname.invalid && firstname.touched"
+            required
+            
+          /><!-- style="border: border-left; margin-top: 0;" --></div>
+        </div>
+
+          <!-- Email -->
+           
+              <!--class="mb-3"-->
+            <div class="form-group ">
+              <div  style="border: border-left;  text-align: left;"> 
+                <label for="email" class="form-label" ><strong>Email</strong></label>
+              </div>
+           
+           <div class="form-group"> <!--style="border: border-left;"-->
+            <input
+              type="email"
+              class="form-control inputclass"
+              id="email"
+              placeholder="Email"
+              name="email"
+              formControlName="email"
+              [class.is-invalid]="email && email.invalid && email.touched"
+              required
+             
+            /><!-- style="border: border-left;"-->
+          </div>
+            
+            <div class="invalid-feedback" *ngIf="email && email.invalid && email.touched">
+              <ng-container *ngIf="email.errors?.['required']; else pattern">
+                <label class="error-msg"> Please Enter Email</label>
+              </ng-container>
+              <ng-template #pattern> <label class="error-msg">Please Enter Valid Email</label>  </ng-template>
+            </div>
+          </div>
+         
+
+
+        <!-- <label for="email">E-Mail</label>
+        <input  type="email" id="email" #email class="form-control"> -->
+      <!--  <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Invalid mail address</span> -->
+       <!-- </div>
+       <div > -->
+        <!-- <label for="password">Password</label>
+        <input  type="password" id="password" class="form-control">
+      </div>
+      <div > -->
+        <!-- <label for="confirm-password">Confirm Password</label>
+        <input  type="password" id="confirm-password" #confirmPassword class="form-control"> -->
+      <!--  <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span> -->
+       <!-- </div> -->
+      <!-- <button type="submit"  class="btn btn-primary">Sign Up</button> -->
+
+      <div class="form-group ">
+        <div  style="border: border-left;  text-align: left;"> 
+           <label for="password" class="lableclass"><strong>Password</strong></label>
+           </div>
+
+     <div style="border: border-left;">  <input formControlName="password" type="password" id="password" class="form-control inputclass "  ></div> 
+      </div>
+      <div class="form-group ">
+        <div  style="border: border-left;  text-align: left;"> 
+        <label for="confirm-password" class="lableclass "><strong>Confirm Password</strong></label>
+        </div>
+       <div style="border: border-left;"><input formControlName="confirmPassword" type="password" id="confirm-password" #confirmPassword class="form-control inputclass "  ></div> 
+        <span *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched">
+          <ng-container *ngIf="userForm.get('confirmPassword')?.errors?.['passwordsNotMatch']; else valid">
+            <label class="error-msg">Passwords do not match</label> 
+          </ng-container>
+          <ng-template #valid></ng-template>
+        </span>
+        
+        </div>
+      </div >
+      <!-- add raio buttons user type-->
+      <div style=" text-align: left;"> <label class="d-block"><strong>User Type</strong></label></div>
+      <div class="form-check form-check-inline form-group text-start" >
+        <input 
+          type="radio" 
+          class="form-check-input " 
+          id="customer" 
+         
+          value="customer"
+        />
+        <!-- formControlName="" -->
+        <label class="form-check-label" for="customer">Customer</label>
+      </div>
+    
+      <div class="form-check form-check-inline form-group text-start">
+        <input 
+          type="radio" 
+          class="form-check-input" 
+          id="staff" 
+          
+          value="staff"
+        />
+        <!-- formControlName="" -->
+        <label class="form-check-label" for="staff">Staff</label>
+      </div>
+       <!-- end user type-->
+      <div class=" buttonA">
+      <button (click)="userSignUp()" class="btn-submit"  ><strong>Sign Up</strong> </button>
+      <button (click)="userLogin()" class="btn-submit" ><strong>Login</strong></button>
+      <!-- <button (click)="closeModal()" class="btn-submit" ><strong>Close</strong></button> -->
+   </div>
+    </form>
+  </div><!--end new style main-->
+
+      <!--test style 1-->
+<!-- </div></div></div></div> -->
+      <!--test style-->
+     </div>  
+    </div>
+  </div>

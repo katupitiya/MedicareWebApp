@@ -1130,4 +1130,23 @@ body {
   
   .custom-table td {
     color: #000; }
+
+    /*Oshadhi*/  
+    .user-icon {
+      display: inline-block;
+      padding: 12px;
+      background: #a0acd6; /* Green */
+      color: white;
+      border-radius: 50%;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      transition: 0.3s ease;
+    }
+    .user-icon:hover {
+      background: #726b7c;
+    }
+
+    .logout-icon {
+      position: relative;
+      cursor: pointer;
+    }
   
