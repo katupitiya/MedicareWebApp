@@ -12,34 +12,78 @@
 <link rel="stylesheet" href="css/aos.css">
 
 <link rel="stylesheet" href="css/style.css">
+
+ <!--login icon Oshadhi-->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!--chatbot Oshadhi-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 <main class="main">
 
   <div class="site-wrap" >
 
-
-    <div class="site-navbar py-2">
-
-      <div class="search-wrap">
-        <div class="container">
+ <!--test code horizontal start 2-->
+ <div class="site-navbar py-2">
+  <div class="search-wrap">
+      <div class="container">
           <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
           <form action="#" method="post">
-            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+              <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
           </form>
-        </div>
       </div>
+  </div>
 
-      <div class="container">
-        <div class="d-flex align-items-center justify-content-between">
+  <!--test code horizontal start-->
+  <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+          <!-- Logo Section (Left) -->
           <div class="logo">
+              <div class="site-logo">
+                  <a href="index.html" class="js-logo-clone">Medicare</a>
+              </div>
             <div class="site-logo">
-              <a href="index.html" class="js-logo-clone">MediCare</a>
+              <a href="index.html" class="js-logo-clone">MEDICARE</a>
             </div>
           </div>
+
+          <!-- Navigation Section (Left) -->
           <div class="main-nav d-none d-lg-block">
+              <nav class="site-navigation text-right text-md-center" role="navigation">
+                  <ul class="site-menu js-clone-nav d-none d-lg-block">
+                      <li class="active"><a href="index.html">Home</a></li>
+                      <li><a (click)="toggleComponent()">Store</a></li>
+                      <li class="has-children">
+                          <a href="#">Dropdown</a>
+                          <ul class="dropdown">
+                              <li><a href="#">Supplements</a></li>
+                              <li class="has-children">
+                                  <a href="#">Vitamins</a>
+                                  <ul class="dropdown">
+                                      <li><a href="#">Supplements</a></li>
+                                      <li><a href="#">Vitamins</a></li>
+                                      <li><a href="#">Diet &amp; Nutrition</a></li>
+                                      <li><a href="#">Tea &amp; Coffee</a></li>
+                                  </ul>
+                              </li>
+                              <li><a href="#">Diet &amp; Nutrition</a></li>
+                              <li><a href="#">Tea &amp; Coffee</a></li>
+                          </ul>
+                      </li>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="contact.html">Contact</a></li>
+                  </ul>
+              </nav>
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li class="active"><a href="index.html">Home</a></li>
-                <li><a (click)="toggleComponent()">Store</a></li>
+                <li><a *ngIf="!showPatientComponent" (click)="toggleComponent()">Store</a></li>
+                <li class="has-children">
+                  <a href="#">Patient Managment</a>
+                  <ul class="dropdown">
+                    <li><a (click)="patientComponentOrder()">View Your Orders</a></li>
+                    <li><a></a></li>
+                  </ul>
+                </li>
                 <li class="has-children">
                   <a>Inventory Mangement</a>
                 <ul class="dropdown">
@@ -60,20 +104,52 @@
               </ul>
             </nav>
           </div>
-          <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="cart.html" class="icons-btn d-inline-block bag">
-              <span class="icon-shopping-bag"></span>
-              <span class="number">2</span>
-            </a>
-            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-                class="icon-menu"></span></a>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="site-blocks-cover backgroundImg" *ngIf="!showComponent && !inventoryComponent" >
+          <!-- Icons Section (Left) -->
+          <div class="ml-auto d-flex align-items-center">
+              <!-- Chatbot Icon -->
+              <button class="chatbot-icon" style="background: none; color: #c9a1a1; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; outline: none;">
+                  <i class="fas fa-comment user-icon"></i>
+              </button>
+              
+              <!-- Other Icons (Shopping Bag, Search) -->
+              <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+              <a href="cart.html" class="icons-btn d-inline-block bag">
+                  <span class="icon-shopping-bag"></span>
+                  <span class="number">2</span>
+              </a>
+
+              <!-- Menu Toggle Icon -->
+              <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
+          </div>
+
+          <!-- Login/Logout Button (Right) -->
+          <div class="ml-auto d-flex align-items-center">
+              <h5>Good {{ currentTimeOfDay }} {{LoggedUserName}} !</h5>
+              <div *ngIf="isLogout; else logoutTemplate">
+                  <button (click)="showLogin()" style="background: none; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; outline: none;">
+                      <i class="fa-solid fa-user user-icon logoin-icon" title="Sign In / Sign Up"></i>
+                  </button>
+              </div>
+              <ng-template #logoutTemplate>
+                  <button (click)="showLogout()" class="logout-login-btn" style="background: none; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; outline: none;">
+                      <i class="fa-solid fa-power-off user-icon logout-icon" content="Sign Out"></i>
+                  </button>
+              </ng-template>
+          </div>
+          <div><button style="background: none; color: #6cc424; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; outline: none;">Manage Users</button></div>
+      </div>
+  </div>
+  <!-- test horizontal ends-->
+</div>
+
+   <!-- test horizontal ends2-->
+    <div class="site-blocks-cover backgroundImg" *ngIf="showLoginPage">
+      <app-login  (close)="hideModal($event)" [login]="message" (userName)="receiveData($event)" (userLoged)="hideModal($event)" (userSignUpSuccess)="hideWhenSuccessSignUp($event)"></app-login>
+      
+    </div>
+    <div class="site-blocks-cover backgroundImg" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent" >
+
       <div class="container">
         <div class="row">
           <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
@@ -88,8 +164,7 @@
         </div>
       </div>
     </div>
-
-    <div class="site-section" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent">
       <div class="container">
         <div class="row align-items-stretch section-overlap">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -129,8 +204,7 @@
         </div>
       </div>
     </div>
-
-    <div class="site-section" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent">
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -141,7 +215,7 @@
         <div class="row" >
           <div class="col-sm-6 col-lg-4 text-center item mb-4">
             <span class="tag">Sale</span>
-            <a href="shop-single.html"> <img src="images/product_01.png" alt="Image"></a>
+            <a href="shop-single.html"> <img src="" alt="Image"></a>
             <h3 class="text-dark"><a href="shop-single.html">Bioderma</a></h3>
             <p class="price"><del>95.00</del> &mdash; $55.00</p>
           </div>
@@ -182,8 +256,7 @@
       </div>
     </div>
 
-    
-    <div class="site-section bg-light" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section bg-light" *ngIf="!showComponent && !inventoryComponent && !showPatientComponent">
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -201,7 +274,7 @@
               </div>
 
               <div class="text-center item mb-4">
-                <a href="shop-single.html"> <img src="images/product_01.png" alt="Image"></a>
+                <a href="shop-single.html"> <img src="" alt="Image"></a>
                 <h3 class="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
                 <p class="price">$120.00</p>
               </div>
@@ -223,8 +296,7 @@
         </div>
       </div>
     </div>
-
-    <div class="site-section" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section" *ngIf="!showComponent && !inventoryComponent" && !showPatientComponent>
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -283,7 +355,14 @@
       </div>
     </div>
 
-    <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');" *ngIf="!showComponent && !inventoryComponent">
+    <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');" *ngIf="!showComponent && !inventoryComponent && showPatientComponent">
+      <app-patient></app-patient>
+    </div>
+
+     <div *ngIf="showComponent">
+      <app-store ></app-store>
+    </div>
+    <div class="site-section bg-secondary bg-image" style="background-image: url('images/bg_2.jpg');">
       <div class="container">
         <div class="row align-items-stretch">
           <div class="col-lg-6 mb-5 mb-lg-0">
@@ -314,6 +393,7 @@
     <div *ngIf="inventoryComponent">
       <app-inventory [selectedSection]="selectedSection"></app-inventory>
     </div>
+
     <div *ngIf="showSupplierComponent">
       <app-supply-management [selectedSection]="selectedSection"></app-supply-management>
     </div>
@@ -381,6 +461,7 @@
 
 
 </main>
+
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
